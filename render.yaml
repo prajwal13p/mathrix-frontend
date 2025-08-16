@@ -1,7 +1,6 @@
 services:
-  - type: web
+  - type: static
     name: mathrix-frontend
-    env: static
     plan: free
     buildCommand: npm install && npm run build
     staticPublishPath: ./build
@@ -14,3 +13,11 @@ services:
         value: false
       - key: REACT_APP_ENABLE_DEBUG
         value: false
+    buildFilter:
+      paths:
+        - src/**
+        - public/**
+        - package.json
+        - package-lock.json
+        - tailwind.config.js
+        - postcss.config.js
