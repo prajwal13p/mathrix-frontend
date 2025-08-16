@@ -1,0 +1,917 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ensure no white spaces or gaps anywhere */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Dark mode transitions */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Custom animations for AI-style elements */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px); 
+    opacity: 0.8;
+  }
+  25% { 
+    transform: translateY(-8px) translateX(2px); 
+    opacity: 1;
+  }
+  50% { 
+    transform: translateY(-12px) translateX(-1px); 
+    opacity: 0.9;
+  }
+  75% { 
+    transform: translateY(-6px) translateX(1px); 
+    opacity: 1;
+  }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(147, 51, 234, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(147, 51, 234, 0.6); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Modern input box animations */
+@keyframes gradient-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 10px rgba(147, 51, 234, 0.15),
+      0 0 20px rgba(147, 51, 234, 0.1),
+      0 0 30px rgba(147, 51, 234, 0.05);
+  }
+  50% {
+    box-shadow: 
+      0 0 15px rgba(147, 51, 234, 0.2),
+      0 0 25px rgba(147, 51, 234, 0.15),
+      0 0 35px rgba(147, 51, 234, 0.1);
+  }
+}
+
+@keyframes border-glow {
+  0%, 100% {
+    border-color: rgba(147, 51, 234, 0.4);
+    box-shadow: 
+      0 0 5px rgba(147, 51, 234, 0.15),
+      0 0 10px rgba(147, 51, 234, 0.1),
+      inset 0 0 5px rgba(147, 51, 234, 0.05);
+  }
+  50% {
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 
+      0 0 8px rgba(59, 130, 246, 0.2),
+      0 0 15px rgba(59, 130, 246, 0.15),
+      inset 0 0 8px rgba(59, 130, 246, 0.1);
+  }
+}
+
+/* Simplified smooth animations */
+@keyframes gentle-float {
+  0%, 100% { 
+    transform: translateY(0px) scale(1) translateX(0px);
+    opacity: 0.8;
+  }
+  25% { 
+    transform: translateY(-8px) scale(1.01) translateX(1px);
+    opacity: 0.9;
+  }
+  50% { 
+    transform: translateY(-12px) scale(1.02) translateX(-1px);
+    opacity: 1;
+  }
+  75% { 
+    transform: translateY(-6px) scale(1.01) translateX(0.5px);
+    opacity: 0.9;
+  }
+}
+
+/* Smooth cosmic cloud animation */
+@keyframes cosmic-float {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0.6;
+  }
+  33% { 
+    transform: translateY(-10px) translateX(3px) rotate(1deg);
+    opacity: 0.8;
+  }
+  66% { 
+    transform: translateY(-15px) translateX(-2px) rotate(-1deg);
+    opacity: 1;
+  }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% { 
+    opacity: 0.6;
+  }
+  50% { 
+    opacity: 0.9;
+  }
+}
+
+@keyframes text-blink {
+  0%, 50% { 
+    opacity: 1;
+    filter: brightness(1) drop-shadow(0 0 10px rgba(147, 51, 234, 0.8)) drop-shadow(0 0 40px rgba(36, 77, 143, 0.6));
+  }
+  25%, 75% { 
+    opacity: 0.95;
+    filter: brightness(0.8) drop-shadow(0 0 5px rgba(147, 51, 234, 0.4)) drop-shadow(0 0 20px rgba(32, 72, 136, 0.3));
+  }
+  100% { 
+    opacity: 1;
+    filter: brightness(1) drop-shadow(0 0 10px rgba(147, 51, 234, 0.8)) drop-shadow(0 0 40px rgba(25, 59, 113, 0.6));
+  }
+}
+
+/* New shimmer text animation for light theme */
+@keyframes shimmer-text {
+  0% {
+    background-position: -200% center;
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    filter: brightness(1.1) saturate(1.2);
+  }
+  100% {
+    background-position: 200% center;
+    filter: brightness(1) saturate(1);
+  }
+}
+
+/* Chatbot-specific animations */
+@keyframes chat-bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes typing-indicator {
+  0%, 60%, 100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-10px);
+  }
+}
+
+/* Apply animations */
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-cosmic-float {
+  animation: cosmic-float 12s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.4s ease-out forwards;
+}
+
+.animate-fade-in-scale {
+  animation: fade-in-scale 0.3s ease-out forwards;
+}
+
+.animate-gentle-float {
+  animation: gentle-float 4s ease-in-out infinite;
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+.animate-text-blink {
+  animation: text-blink 3s ease-in-out infinite;
+}
+
+.animate-shimmer-text {
+  animation: shimmer-text 3s ease-in-out infinite;
+}
+
+.animate-chat-bubble-in {
+  animation: chat-bubble-in 0.4s ease-out forwards;
+}
+
+.animate-typing-indicator {
+  animation: typing-indicator 1.4s ease-in-out infinite;
+}
+
+/* Custom component classes */
+.btn-primary {
+  @apply bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-500 hover:shadow-lg hover:shadow-purple-500/25 focus:outline-none focus:ring-0 relative overflow-hidden;
+  position: relative;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-primary:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, rgba(147, 51, 234, 0.2), rgba(59, 130, 246, 0.2));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover::after {
+  opacity: 1;
+}
+
+.btn-outline {
+  @apply border-2 border-purple-500 text-purple-500 font-semibold py-3 px-6 rounded-xl transition-all duration-500 hover:bg-purple-500 hover:text-white focus:outline-none focus:ring-0 relative overflow-hidden;
+  position: relative;
+}
+
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(147, 51, 234, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-outline:hover::before {
+  transform: translateX(100%);
+}
+
+/* Cosmic button variants */
+.btn-cosmic {
+  @apply bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-500 hover:shadow-xl hover:shadow-purple-500/30 focus:outline-none focus:ring-0 relative overflow-hidden;
+  position: relative;
+  background-size: 200% 200%;
+  animation: gradient-flow 4s ease infinite;
+}
+
+.btn-cosmic:hover {
+  background-size: 200% 200%;
+  animation: gradient-flow 2s ease infinite;
+}
+
+.btn-cosmic::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.8s ease;
+}
+
+.btn-cosmic:hover::before {
+  transform: translateX(100%);
+}
+
+/* Glowing button effects */
+.btn-glow {
+  @apply relative overflow-hidden transition-all duration-500;
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 30px rgba(147, 51, 234, 0.5), 0 0 50px rgba(147, 51, 234, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Floating button effect */
+.btn-float {
+  @apply transition-all duration-500;
+}
+
+.btn-float:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(147, 51, 234, 0.3);
+}
+
+/* Button with cosmic particles */
+.btn-cosmic-particles {
+  @apply relative overflow-hidden;
+}
+
+.btn-cosmic-particles::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-cosmic-particles:hover::before {
+  opacity: 1;
+}
+
+/* Enhanced button states */
+.btn-primary:active,
+.btn-cosmic:active,
+.btn-outline:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Button loading state */
+.btn-loading {
+  @apply relative overflow-hidden;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Small cosmic buttons */
+.btn-cosmic-sm {
+  @apply bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 focus:outline-none focus:ring-0 relative overflow-hidden;
+  position: relative;
+}
+
+.btn-cosmic-sm::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+
+.btn-cosmic-sm:hover::before {
+  transform: translateX(100%);
+}
+
+/* Button group styling */
+.btn-group {
+  @apply flex space-x-2;
+}
+
+.btn-group .btn-cosmic:not(:last-child) {
+  @apply rounded-r-none;
+}
+
+.btn-group .btn-cosmic:not(:first-child) {
+  @apply rounded-l-none;
+}
+
+.btn-group .btn-cosmic:first-child {
+  @apply rounded-l-xl;
+}
+
+.btn-group .btn-cosmic:last-child {
+  @apply rounded-r-xl;
+}
+
+/* Skill selection buttons */
+.skill-button {
+  @apply relative overflow-hidden transition-all duration-500;
+}
+
+.skill-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(147, 51, 234, 0.05), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.skill-button:hover::before {
+  transform: translateX(100%);
+}
+
+.skill-button.selected {
+  @apply relative;
+}
+
+.skill-button.selected::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(147, 51, 234, 0.1) 0%, transparent 70%);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Button with cosmic border glow */
+.btn-cosmic-border {
+  @apply relative overflow-hidden;
+  border: 2px solid transparent;
+  background: linear-gradient(45deg, rgba(147, 51, 234, 0.8), rgba(59, 130, 246, 0.8), rgba(147, 51, 234, 0.8));
+  background-size: 200% 200%;
+  animation: gradient-flow 3s ease infinite;
+}
+
+.btn-cosmic-border::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: var(--button-bg, #1f2937);
+  border-radius: 0.5rem;
+  z-index: 1;
+}
+
+.btn-cosmic-border > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Enhanced button animations */
+@keyframes button-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(147, 51, 234, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.5), 0 0 30px rgba(147, 51, 234, 0.3);
+  }
+}
+
+.btn-glow-animate {
+  animation: button-glow 2s ease-in-out infinite;
+}
+
+/* Button with floating particles */
+.btn-particles {
+  @apply relative overflow-hidden;
+}
+
+.btn-particles::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-particles:hover::before {
+  opacity: 1;
+}
+
+.card {
+  @apply bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-2xl p-6 shadow-xl shadow-gray-200/40;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 rounded-2xl border-2 border-gray-300 text-gray-900 placeholder-gray-500 transition-all duration-300 focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/25;
+}
+
+/* Dark mode overrides */
+.dark .card {
+  @apply bg-slate-800/80 border-slate-700/50 shadow-black/40;
+}
+
+.dark .input-field {
+  @apply bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-purple-500 focus:ring-purple-500/25;
+}
+
+/* Responsive design utilities */
+@media (max-width: 640px) {
+  .animate-float {
+    animation-duration: 8s;
+  }
+  
+  .animate-gentle-float {
+    animation-duration: 6s;
+  }
+}
+
+/* Enhanced focus states */
+.focus-within\:ring-purple-500\/25:focus-within {
+  --tw-ring-color: rgb(147 51 234 / 0.25);
+}
+
+/* Custom scrollbar for chat interface */
+.chat-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(147, 51, 234, 0.3);
+  border-radius: 3px;
+}
+
+.chat-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(147, 51, 234, 0.5);
+}
+
+/* Glowing input effect */
+.input-glow:focus {
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+}
+
+/* Skill selection animations */
+.skill-selected {
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
+.skill-hover:hover {
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+}
+
+/* Full viewport coverage - ensure no gaps */
+.min-h-screen {
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+}
+
+/* Background coverage utilities */
+.bg-cover-full {
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Grid pattern utilities */
+.grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.grid-pattern-dark {
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.3) 1px, transparent 1px);
+  background-size: 100px 100px;
+}
+
+/* Ensure absolute positioning covers entire viewport */
+.absolute.inset-0 {
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Override Tailwind container max-width behavior */
+.container {
+  max-width: 100% !important;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 100% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 100% !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 100% !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 100% !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 100% !important;
+  }
+}
+
+/* Force full width for specific elements */
+.w-full {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Override any max-width constraints */
+.max-w-none {
+  max-width: none !important;
+}
+
+.max-w-full {
+  max-width: 100% !important;
+}
+
+/* Animation classes */
+.animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradient-flow 4s ease infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-border-glow {
+  animation: border-glow 4s ease-in-out infinite;
+}
+
+/* Enhanced input focus effects - more subtle */
+.input-modern:focus {
+  animation: pulse-glow 3s ease-in-out infinite;
+  border-color: rgba(147, 51, 234, 0.6);
+  box-shadow: 
+    0 0 10px rgba(147, 51, 234, 0.2),
+    0 0 20px rgba(147, 51, 234, 0.1),
+    inset 0 0 10px rgba(147, 51, 234, 0.05);
+}
+
+/* Dark mode specific cosmic theming */
+.dark .input-modern:focus {
+  animation: pulse-glow 3s ease-in-out infinite;
+  border-color: rgba(147, 51, 234, 0.6);
+  box-shadow: 
+    0 0 10px rgba(147, 51, 234, 0.2),
+    0 0 20px rgba(147, 51, 234, 0.1),
+    inset 0 0 10px rgba(147, 51, 234, 0.05);
+}
+
+/* Light mode specific cosmic theming - OVERRIDE with warm colors */
+.light .input-modern:focus {
+  animation: warm-border-flow 3s ease-in-out infinite !important;
+  border-color: rgba(245, 158, 11, 0.6) !important;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.2), 0 0 15px rgba(245, 158, 11, 0.1), inset 0 0 8px rgba(245, 158, 11, 0.05) !important;
+}
+
+/* Light mode cosmic background */
+.light .input-modern {
+  background: linear-gradient(135deg, rgba(255, 251, 235, 0.7), rgba(254, 243, 199, 0.7));
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+/* Light mode hover effects */
+.light .input-modern:hover {
+  border-color: rgba(245, 158, 11, 0.4);
+  background: linear-gradient(135deg, rgba(241, 245, 249, 0.95), rgba(226, 232, 240, 0.95));
+}
+
+/* Light mode specific animations and effects */
+.light .animate-gradient-flow {
+  background: linear-gradient(45deg, rgba(245, 158, 11, 0.1), rgba(251, 146, 60, 0.1), rgba(244, 63, 94, 0.1), rgba(245, 158, 11, 0.1));
+}
+
+.light .animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.2), transparent);
+}
+
+.light .animate-float-particle {
+  background: linear-gradient(45deg, rgba(245, 158, 11, 0.4), rgba(251, 146, 60, 0.4));
+}
+
+/* Floating particles animation - more subtle */
+@keyframes float-particle {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.2;
+  }
+  25% {
+    transform: translateY(-3px) translateX(1px) scale(1.1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-6px) translateX(-1px) scale(0.9);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translateY(-3px) translateX(1px) scale(1.05);
+    opacity: 0.5;
+  }
+}
+
+.animate-float-particle {
+  animation: float-particle 4s ease-in-out infinite;
+}
+
+/* Warm tone flowing animations for light mode */
+@keyframes warm-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+    opacity: 0.4;
+  }
+  25% {
+    background-position: 100% 50%;
+    opacity: 0.6;
+  }
+  50% {
+    background-position: 100% 100%;
+    opacity: 0.8;
+  }
+  75% {
+    background-position: 0% 100%;
+    opacity: 0.6;
+  }
+}
+
+@keyframes warm-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+}
+
+@keyframes warm-shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%);
+  }
+}
+
+@keyframes warm-border-flow {
+  0%, 100% {
+    border-color: rgba(245, 158, 11, 0.4);
+    box-shadow: 
+      0 0 8px rgba(245, 158, 11, 0.2),
+      0 0 15px rgba(245, 158, 11, 0.1);
+  }
+  25% {
+    border-color: rgba(251, 146, 60, 0.4);
+    box-shadow: 
+      0 0 10px rgba(251, 146, 60, 0.25),
+      0 0 20px rgba(251, 146, 60, 0.15);
+  }
+  50% {
+    border-color: rgba(244, 63, 94, 0.4);
+    box-shadow: 
+      0 0 12px rgba(244, 63, 94, 0.3),
+      0 0 25px rgba(244, 63, 94, 0.2);
+  }
+  75% {
+    border-color: rgba(245, 158, 11, 0.4);
+    box-shadow: 
+      0 0 10px rgba(245, 158, 11, 0.25),
+      0 0 20px rgba(245, 158, 11, 0.15);
+  }
+}
+
+/* Light mode specific cosmic effects */
+.light .input-modern:focus {
+  animation: warm-border-flow 3s ease-in-out infinite;
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 
+    0 0 8px rgba(245, 158, 11, 0.2),
+    0 0 15px rgba(245, 158, 11, 0.1),
+    inset 0 0 8px rgba(245, 158, 11, 0.05);
+}
+
+/* Warm tone gradient flow for light mode */
+.light .animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: warm-flow 4s ease infinite;
+}
+
+/* Warm tone shimmer for light mode */
+.light .animate-shimmer {
+  animation: warm-shimmer 3s ease-in-out infinite;
+}
+
+/* Warm tone pulse for light mode elements */
+.light .animate-warm-pulse {
+  animation: warm-pulse 2s ease-in-out infinite;
+}
+
+/* Enhanced warm tone effects */
+.warm-glow {
+  box-shadow: 
+    0 0 10px rgba(245, 158, 11, 0.2),
+    0 0 20px rgba(245, 158, 11, 0.1),
+    0 0 30px rgba(245, 158, 11, 0.05);
+}
+
+.warm-glow:hover {
+  box-shadow: 
+    0 0 15px rgba(245, 158, 11, 0.3),
+    0 0 25px rgba(245, 158, 11, 0.2),
+    0 0 35px rgba(245, 158, 11, 0.1);
+}
