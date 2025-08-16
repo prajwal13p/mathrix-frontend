@@ -1,6 +1,7 @@
 services:
-  - type: static
+  - type: web
     name: mathrix-frontend
+    env: static
     plan: free
     buildCommand: npm install && npm run build
     staticPublishPath: ./build
