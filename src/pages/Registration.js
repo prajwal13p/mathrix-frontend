@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { MessageCircle, Send, Sparkles, Sun, Moon, CheckCircle, AlertCircle, User, Lock, Mail, Hash, Brain, Edit3, X } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config/api';
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -117,7 +118,7 @@ const Registration = () => {
       if (formData.email && formData.email.includes('@')) {
         setEmailChecking(true);
         try {
-          const response = await axios.get(`http://localhost:8000/api/participants/check-email/${encodeURIComponent(formData.email)}`);
+          const response = await axios.get(API_ENDPOINTS.CHECK_EMAIL(formData.email));
           setEmailExists(response.data.exists);
           if (response.data.exists) {
             setErrors(prev => ({ ...prev, email: 'This email is already registered. Please use a different email or login instead.' }));
@@ -148,7 +149,7 @@ const Registration = () => {
       if (formData.usn && formData.usn.trim().length >= 5) {
         setUsnChecking(true);
         try {
-          const response = await axios.get(`http://localhost:8000/api/participants/check-usn/${encodeURIComponent(formData.usn.trim())}`);
+          const response = await axios.get(API_ENDPOINTS.CHECK_USN(formData.usn.trim()));
           setUsnExists(response.data.exists);
           if (response.data.exists) {
             setErrors(prev => ({ ...prev, usn: 'This USN is already registered. Please use a different USN.' }));
@@ -219,7 +220,7 @@ const Registration = () => {
         
         // Double-check email availability before proceeding
         try {
-          const response = await axios.get(`http://localhost:8000/api/participants/check-email/${encodeURIComponent(userInput)}`);
+          const response = await axios.get(API_ENDPOINTS.CHECK_EMAIL(userInput));
           if (response.data.exists) {
             addBotMessage("❌ This email is already registered. Please use a different email address or login with your existing account.");
             addBotMessage("You have two options:");
@@ -257,14 +258,17 @@ const Registration = () => {
           return;
         }
         try {
-          const response = await axios.get(`http://localhost:8000/api/participants/check-usn/${encodeURIComponent(userInput)}`);
+          const response = await axios.get(API_ENDPOINTS.CHECK_USN(userInput));
           if (response.data.exists) {
             addBotMessage('❌ This USN is already registered. Please enter a different USN.');
             setUsnExists(true);
             return;
           }
+          // USN is valid and not registered, proceed
+          setUsnExists(false);
         } catch (error) {
           console.error('USN check error:', error);
+          // If there's an error checking USN, still allow the user to proceed
         }
       }
 
@@ -418,8 +422,8 @@ const Registration = () => {
     try {
       // Validate duplicates just before submit
       const [emailResp, usnResp] = await Promise.all([
-        axios.get(`http://localhost:8000/api/participants/check-email/${encodeURIComponent(formData.email)}`),
-        axios.get(`http://localhost:8000/api/participants/check-usn/${encodeURIComponent(formData.usn)}`)
+        axios.get(API_ENDPOINTS.CHECK_EMAIL(formData.email)),
+        axios.get(API_ENDPOINTS.CHECK_USN(formData.usn))
       ]);
       if (emailResp.data.exists) {
         setIsSubmitting(false);
@@ -434,7 +438,7 @@ const Registration = () => {
         return;
       }
 
-      const response = await axios.post('http://localhost:8000/api/participants/register', {
+      const response = await axios.post(API_ENDPOINTS.REGISTER, {
         name: formData.name,
         usn: formData.usn,
         email: formData.email,
