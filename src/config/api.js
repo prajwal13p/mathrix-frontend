@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://mathrix-backend.onrender.com';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://mathrix-backend-cnvq.onrender.com';
 
 export const API_ENDPOINTS = {
   // Auth
